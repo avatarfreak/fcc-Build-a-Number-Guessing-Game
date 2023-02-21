@@ -21,3 +21,30 @@ else
     echo "Welcome back, $USERNAME! You have played $GAMES_PLAYED games, and your best game took $BEST_GAME guesses."
   done
 fi
+
+echo "Guess the secret number between 1 and 1000:"
+read GUESS
+
+NUMBER_OF_GUESS=1
+# Guess until it is integer  
+while [[ ! $GUESS =~ ^[0-9]+$ ]]
+do
+  echo "That is not an integer, guess again:"
+  read GUESS 
+done
+
+while [[ $GUESS != $SECRET_NUMBER ]]
+do
+  # if lower
+  if (( $GUESS <= $SECRET_NUMBER )); then
+    echo "It's higher than that, guess again:"
+    NUMBER_OF_GUESS=$(( $NUMBER_OF_GUESS + 1 ))    
+    read GUESS
+
+  # if higher
+  else
+    echo "It's lower than that, guess again:"
+    NUMBER_OF_GUESS=$(( $NUMBER_OF_GUESS + 1 ))
+    read GUESS
+  fi
+done
